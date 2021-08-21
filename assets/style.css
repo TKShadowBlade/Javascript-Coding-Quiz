@@ -14,11 +14,11 @@ body {
 }
 
 .container {
-    width: 400px;
+    width: 800px;
     max-width: 80%;
 }
 
-.control {
+.controls {
     display: flex;
     justify-content: center;
     align-items: center;

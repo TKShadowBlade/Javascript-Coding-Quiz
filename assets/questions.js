@@ -1,4 +1,4 @@
-var questions = [
+const questionsArr = [
     {
         title: "The C in CSS is an abbreviation for what word?",
         choices: ["crescent", "concave", "cascading"],
