@@ -3,14 +3,14 @@ const questionArea = document.getElementById("question-card")
 const answerButtons = document.getElementById("answer-buttons")
 const questionsEl = document.getElementById("questions")
 const timerEl = document.getElementById("timer")
+let correct = document.getElementById("correct")
+let wrong = document.getElementById("wrong")
 
 var timeRemain = 80
 
 let randomQuestion
 let questionIndex = 0
 let currentQuestion = ""
-let correct = 0
-let wrong = 0
 
 startButton.addEventListener("click", startQuiz)
 
@@ -27,8 +27,8 @@ function startQuiz(){
 function newQuestion() {
     currentQuestion = questionsArr[questionIndex]
     showQuestion(currentQuestion)
+    questionIndex++
     
-        questionIndex++
     
 }
 
@@ -39,6 +39,7 @@ function startTimer() {
 
         if(timeRemain === 0) {
             clearInterval(timeInterval);
+            endQuiz()
         }
     }, 1000);
 
@@ -61,26 +62,33 @@ function pickAnswer(event) {
     if (event.target.value === currentQuestion.answer) {
         alert("Correct!")
         correct++
+        correct.textContent = ""
     }
     else {
         alert("Incorrect!")
         wrong++
+        wrong.textContent = ""
+        
     }
     if (questionIndex < questionsArr.length){
     newQuestion()}
     else {
+        endQuiz()
         displayStats()
     }
 }
 
 function displayStats() {
-
+// Show total right and wrong answers
+    alert(correct + " correct")
+    alert(wrong + " incorrect")
 }
 
 function endQuiz() {
-
+// Set up what happens when the quiz is over
+    prompt("Enter your initials to save your score")
 }
 
 function highScores() {
-
+// collect and display high scores
 }
