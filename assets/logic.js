@@ -62,13 +62,13 @@ function showQuestion(question) {
 function pickAnswer(event) {
     if (event.target.value === currentQuestion.answer) {
         alert("Correct!")
-        correct.innerHTML = "Correct: " + correct
+        correct.textContent = "Correct: " + correct
         correct++
         
     }
     else {
         alert("Incorrect!")
-        wrong.innerHTML = "Wrong: " + wrong
+        wrong.textContent = "Wrong: " + wrong
         wrong++
         
         
@@ -83,8 +83,8 @@ function pickAnswer(event) {
 
 function displayStats() {
 // Show total right and wrong answers
-    alert(correct + " correct")
-    alert(wrong + " incorrect")
+    alert(correct + " Correct")
+    alert(wrong + " Incorrect")
 }
 
 function endQuiz() {
