@@ -3,10 +3,12 @@ const questionArea = document.getElementById("question-card")
 const answerButtons = document.getElementById("answer-buttons")
 const questionsEl = document.getElementById("questions")
 const timerEl = document.getElementById("timer")
-let correct = document.getElementById("correct")
-let wrong = document.getElementById("wrong")
+var correct = document.getElementById("correct")
+var wrong = document.getElementById("wrong")
 
 var timeRemain = 80
+var correct = 0
+var wrong = 0
 
 let randomQuestion
 let questionIndex = 0
@@ -24,14 +26,6 @@ function startQuiz(){
     newQuestion()
 }
 
-function newQuestion() {
-    currentQuestion = questionsArr[questionIndex]
-    showQuestion(currentQuestion)
-    questionIndex++
-    
-    
-}
-
 function startTimer() {
     let timeInterval = setInterval(function(){
         timeRemain--;
@@ -43,6 +37,13 @@ function startTimer() {
         }
     }, 1000);
 
+}
+
+function newQuestion() {
+    currentQuestion = questionsArr[questionIndex]
+    showQuestion(currentQuestion)
+    questionIndex++
+       
 }
 
 function showQuestion(question) {
@@ -61,13 +62,15 @@ function showQuestion(question) {
 function pickAnswer(event) {
     if (event.target.value === currentQuestion.answer) {
         alert("Correct!")
+        correct.innerHTML = "Correct: " + correct
         correct++
-        correct.textContent = ""
+        
     }
     else {
         alert("Incorrect!")
+        wrong.innerHTML = "Wrong: " + wrong
         wrong++
-        wrong.textContent = ""
+        
         
     }
     if (questionIndex < questionsArr.length){
