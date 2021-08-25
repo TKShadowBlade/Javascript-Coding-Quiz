@@ -1,14 +1,15 @@
 const startButton = document.getElementById("start-button")
 const questionArea = document.getElementById("question-card")
 const answerButtons = document.getElementById("answer-buttons")
-const questionsEl = document.getElementById("questions")
+var questionsEl = document.getElementById("questions")
 const timerEl = document.getElementById("timer")
-var correct = document.getElementById("correct")
-var wrong = document.getElementById("wrong")
+var score = document.getElementById("score")
+
 
 var timeRemain = 80
-var correct = 0
-var wrong = 0
+var timePenalty = 10
+var startScore = 0
+
 
 let randomQuestion
 let questionIndex = 0
@@ -19,7 +20,6 @@ startButton.addEventListener("click", startQuiz)
 
 function startQuiz(){
     startButton.classList.add("hide")
-    
     questionIndex = 0
     questionArea.classList.remove("hide")
     startTimer()
@@ -33,7 +33,7 @@ function startTimer() {
 
         if(timeRemain === 0) {
             clearInterval(timeInterval);
-            endQuiz()
+            finalScore()
         }
     }, 1000);
 
@@ -62,34 +62,43 @@ function showQuestion(question) {
 function pickAnswer(event) {
     if (event.target.value === currentQuestion.answer) {
         alert("Correct!")
-        correct.textContent = "Correct: " + correct
-        correct++
+        score.textContent = "Score: " + (startScore + 1)
+        startScore++
+        
         
     }
     else {
         alert("Incorrect!")
-        wrong.textContent = "Wrong: " + wrong
-        wrong++
+        timeRemain-=timePenalty
+        
         
         
     }
     if (questionIndex < questionsArr.length){
     newQuestion()}
     else {
-        endQuiz()
-        displayStats()
+        finalScore()
     }
 }
 
-function displayStats() {
-// Show total right and wrong answers
-    alert(correct + " Correct")
-    alert(wrong + " Incorrect")
-}
+function finalScore() {
+// Show final score
+    questionArea.innerHTML = ""
+    let newHeader = document.createElement("h1")
+        newHeader.setAttribute("id", "newHeader")
+        newHeader.textContent = "Final Score: " + startScore
+        questionArea.append(newHeader)
 
-function endQuiz() {
-// Set up what happens when the quiz is over
-    prompt("Enter your initials to save your score")
+    let newLabel = document.createElement("p")
+        newLabel.setAttribute("id", "newLabel")
+        newLabel.textContent = "Enter Initials Here: "
+        questionArea.appendChild(newLabel)
+
+    let newInput = document.createElement("input")
+        newInput.setAttribute("type", "text")
+        newInput.setAttribute("id", "initials")
+        newInput.textContent = ""
+        questionArea.appendChild(newInput)
 }
 
 function highScores() {
