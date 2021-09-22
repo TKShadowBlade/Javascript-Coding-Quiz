@@ -3,12 +3,14 @@ const questionArea = document.getElementById("question-card")
 const answerButtons = document.getElementById("answer-buttons")
 var questionsEl = document.getElementById("questions")
 const timerEl = document.getElementById("timer")
-var score = document.getElementById("score")
+let score = document.getElementById("score")
+const highScore = document.getElementById("high-scores")
 
 
 var timeRemain = 80
 var timePenalty = 10
 var startScore = 0
+var timeInterval
 
 
 let randomQuestion
@@ -26,6 +28,8 @@ function startQuiz(){
     newQuestion()
 }
 
+
+
 function startTimer() {
     let timeInterval = setInterval(function(){
         timeRemain--;
@@ -33,9 +37,11 @@ function startTimer() {
 
         if(timeRemain === 0) {
             clearInterval(timeInterval);
-            finalScore()
+            endQuiz();
         }
-    }, 1000);
+
+        }, 1000)
+
 
 }
 
@@ -77,18 +83,19 @@ function pickAnswer(event) {
     if (questionIndex < questionsArr.length){
     newQuestion()}
     else {
-        finalScore()
+        endQuiz()
     }
 }
 
-function finalScore() {
-// Show final score
+function endQuiz() {
+// Create area to show final score
     questionArea.innerHTML = ""
     let newHeader = document.createElement("h1")
         newHeader.setAttribute("id", "newHeader")
         newHeader.textContent = "Final Score: " + startScore
         questionArea.append(newHeader)
 
+// create area to enter initials
     let newLabel = document.createElement("p")
         newLabel.setAttribute("id", "newLabel")
         newLabel.textContent = "Enter Initials Here: "
@@ -99,8 +106,24 @@ function finalScore() {
         newInput.setAttribute("id", "initials")
         newInput.textContent = ""
         questionArea.appendChild(newInput)
-}
 
-function highScores() {
+    let submitButton = document.createElement("button")
+        submitButton.setAttribute("type", "submit")
+        submitButton.setAttribute("id", "Submit")
+        submitButton.textContent = "Submit"
+        questionArea.appendChild(submitButton)
+
 // collect and display high scores
+    submitButton.addEventListener('click', function() {
+        //console.log("Did this work?")
+        localStorage.setItem("inits", newInput.value);
+        localStorage.setItem("score", startScore)
+
+        highScore.textContent = "High Score: " + localStorage.getItem("score")
+    })
+        
+
+        
+
+    
 }
