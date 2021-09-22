@@ -9,3 +9,6 @@ At the end of the quiz, enter your initials where prompted, and your final score
 
 https://tkshadowblade.github.io/Javascript-Coding-Quiz/
 
+<img src="./assets/Images/coding-quiz-start.png">
+<img src="./assets/Images/coding-quiz-snip.png">
+<img src="./assets/Images/coding-quiz.end.png">
